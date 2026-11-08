@@ -1,7 +1,7 @@
 console.log("Please edit index.js");
 
 import createPerson from "./person/createPerson.js";
-import { birthday, greeter } from "./utils.js";
+import { birthday, greet } from "./utils.js";
 
 const klaus = createPerson({ name: "Klaus", age: 34 }, { city: "Aachen", street: "Hauptstraße" });
 const susi = createPerson({ name: "Susi" }, { city: "Mainz", street: "Bahnhofstraße" });
@@ -18,3 +18,4 @@ console.log(birthday(persons, "Klaus"));
 console.log(birthday(persons, "Susi"));
 console.log(birthday(persons, "Walter"));
 
+greet({name: "Paula"});
