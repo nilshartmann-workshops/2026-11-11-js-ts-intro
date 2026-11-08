@@ -65,15 +65,6 @@
           <p></p>
           <p style="margin-top: 5rem">Java | JavaScript, TypeScript | React | GraphQL</p>
           <div style="display: flex; justify-content: center; margin-top: 2rem">
-            <div style="margin-left: 15px">
-              <a href="https://graphql.schule/video-kurs"
-                ><img
-                  style="max-height: 450px"
-                  src="slides/images/screenshot-graphql-kurs.png"
-                /><br />https://graphql.schule/video-kurs</a
-              >
-              <br />
-            </div>
             <!--  -->
             <div style="margin-left: 100px">
               <a href="https://reactbuch.de"
@@ -103,15 +94,9 @@
           <textarea data-template>
 ### Zeitplan
 
-* Montag: JavaScript Intro
-  * 9 Uhr bis 16 Uhr
-  * Mittagspause 12:00 bis 13:00 Uhr  🍕 🍝
-  * Kürzere jeweils Pausen zwischendurch ☕️ 😴
-
-* Dienstag: TypeScript + GraphQL Basics
-  * 9 Uhr bis 16 Uhr
-  * Mittagspause 12:00 bis 13:00 Uhr
-  * Kürzere jeweils Pausen zwischendurch ☕️ 😴
+* 9 Uhr bis 16 Uhr
+* Mittagspause 12:00 bis 13:00 Uhr  🍕 🍝
+* Kürzere jeweils Pausen zwischendurch ☕️ 😴
 
 ---
 ### Agenda: JavaScript Grundlagen
@@ -253,7 +238,6 @@ x.toUpperCase(); // Ouch 😱
             name = "Klaus"; // TypeError: invalid assignment to const 'name'
           </code></pre>
 
-          <p class="fragment">Das veraltete <code>var</code> bitte <b>nicht mehr verwenden</b>!</p>
         </section>
 
         <!-- ============================================================================= -->
@@ -907,21 +891,6 @@ sayHelloToSusi(); // Hello, undefined 🤪
         </section>
 
         <!-- ============================================================================= -->
-        <section>
-          <h3>Objekte und Pfeilfunktionen</h3>
-          <p class="fragment">
-            Pfeilfunktionen eignen sich <b>nicht</b> für Methoden (also für Funktionen an Objekten):
-          </p>
-          <pre class="fragment"><code class="javascript">
-const person = {
-  firstname: "Susi",
-  sayHello: () => { return "Hello, " + this.firstname }
-}
-
-person.sayHello();  Hello, undefined 🤪
-</code></pre>
-          <p class="fragment">(Funktionen an Objekten haben kein "this")</p>
-        </section>
 
         <!-- ============================================================================= -->
         <!-- ============================================================================= -->
@@ -1114,141 +1083,7 @@ person.sayHello();  Hello, undefined 🤪
   </textarea
           >
         </section>
-        <section>
-          <h3>Weitere Operatoren</h3>
-          <p>
-            <a
-                href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Logical_AND"
-            >AND</a
-            >
-          </p>
-          <p>Liefert den ersten ("linken") Wert zurück, wenn sich dieser zu <b>false</b> konvertieren lässt. Ansonsten den zweiten Wert.</p>
 
-          <pre class="fragment"><code class="javascript">
-            const winter = true;
-            const summer = false;
-            const winterAndSummer = winter && summer; // false;
-          </code></pre>
-
-          <pre class="fragment"><code class="javascript">
-            const isSuccess = false;
-            const hint = "Data saved!"
-            console.log(isSuccess && hint); // "false"
-          </code></pre>
-
-          <pre class="fragment"><code class="javascript">
-            const firstname = "Susi";
-            const lastname = "Meier"
-            const name = firstname && lastname; // Susi
-          </code></pre>
-
-          <pre class="fragment"><code class="javascript">
-            const firstname = "";
-            const lastname = "Meier"
-            const firstnameAndLastNameSpecified = firstname && lastname; // "" 😝
-          </code></pre>
-
-        </section>
-        <section>
-          <h3>Weitere Operatoren</h3>
-
-          <p>
-            <a
-                href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Logical_OR"
-            >Logical OR</a
-            >
-          </p>
-          <p>Liefert den ersten ("linken") Wert zurück, wenn sich dieser zu <b>true</b> konvertieren lässt. Ansonsten den zweiten Wert.</p>
-
-          <pre class="fragment"><code class="javascript">
-              const winter = true;
-              const summer = false;
-              const spring = false;
-
-              const isWinterOrSummer = winter || summer; // true
-              const isSummerOrSpring = summer || spring; // false
-            </code></pre>
-
-          <pre class="fragment"><code class="javascript">
-            // Mit nicht-boolean-Werten
-            const firstname = null;
-            const lastname = "Meier"
-            const firstnameOrLastNameSpecified = firstname || lastname; // "Meier"
-          </code></pre>
-
-
-          <pre class="fragment"><code class="javascript">
-            // Mit nicht-boolean-Werten
-            const firstname = "";
-            const lastname = "Meier"
-            const firstnameOrLastNameSpecified = ??? 🤔;
-          </code></pre>
-
-          <pre class="fragment"><code class="javascript">
-            const firstnameOrLastNameSpecified = firstname || lastname; // "Meier" 😝
-          </code></pre>
-        </section>
-
-
-
-        <section>
-          <h3>Weitere Operatoren</h3>
-          <p>
-            <a
-                href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Nullish_coalescing"
-            >Nullish coalescing operator</a
-            >
-          </p>
-          <p>Liefert den ersten ("linken") Wert zurück, wenn dieser <b>nicht</b> </b><b>null</b> oder <b>undefined</b> ist. Ansonsten den zweiten Wert.</p>
-
-          <pre class="fragment"><code class="javascript">
-            const firstname = "Susi";
-            const lastname = "Meier"
-            const name = firstname ?? lastname; // Susi
-          </code></pre>
-
-          <pre class="fragment"><code class="javascript">
-            const firstname = null;
-            const lastname = "Meier"
-            const firstnameAndLastNameSpecified = firstname ?? lastname; // "Meier"
-          </code></pre>
-
-
-
-          <pre class="fragment"><code class="javascript">
-            const firstname = "";
-            const lastname = "Meier"
-            const firstnameAndLastNameSpecified = firstname ?? lastname; // ""
-          </code></pre>
-
-        </section>
-        <!-- ============================================================================= -->
-        <section>
-          <h3>Beispiel: Immutability</h3>
-          <p>
-            In React wird sehr viel mit unveränderlichen ("immutable") Datenstrukturen gearbeitet
-          </p>
-          <p>
-            Dabei werden Objekte und Arrays nicht verändert. Änderungen finden immer nur auf Kopien
-            der Originale statt
-          </p>
-
-          <p><code>Array.map</code> bildet alle Einträge aus einem Array auf ein neues Array ab</p>
-
-          <pre class="fragment"><code class="javascript">
-const persons = [
-  { lastname: "Mueller", firstname: "Klaus", age: 32 }, 
-  { lastname: "Meier", firstname: "Susi", age: 33 }
-]      
-
-const olderPersons = persons.map( p => {
-  return { ...p, age: p.age + 1 }
-})
-          </code></pre>
-          <p class="fragment">
-            Im "echten" Leben: <a href="https://immerjs.github.io/immer/">ImmerJS</a>
-          </p>
-        </section>
         <section>
           <h2>Übung: Arbeiten mit Objekten</h2>
 
@@ -1266,7 +1101,7 @@ const olderPersons = persons.map( p => {
             Wenn alle Stricke reißen, findest Du eine mögliche Lösung in:
             <code>js-intro/03_objects/solution/index.js</code>
           </p>
-          <p class="fragment">Wenn Du fertig bist, bitte "Hand heben" in Zoom ✋‍</p>
+          <p class="fragment">Wenn Du fertig bist, bitte "Hand heben" in Teams ✋‍</p>
         </section>
 
 <!--<section data-markdown="">-->
@@ -1446,7 +1281,6 @@ const olderPersons = persons.map( p => {
 * Um asynchronen Code auszuführen, gibt es zwei Möglichkeiten
   * [Promise API](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise)
   * [async](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/async_function)/[await](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/await) (Alternative Syntax für Promises API)
-* Promises vorsichtig vergleichbar mit einem [`CompletableFuture`](https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/util/concurrent/CompletableFuture.html) in Java
 
           </textarea>
          </section>
@@ -1720,91 +1554,6 @@ loadUserProfileFromServer("susi")
           <h3>Module</h3>
           <p>Module bestimmen explizit, was außerhalb verwendet werden darf</p>
           <p>Module geben explizit an, was sie aus anderen Modulen verwenden wollen</p>
-        </section>
-
-        <section data-markdown>
-          <textarea data-template>
-### Modulsysteme: Common JS vs ECMAScript Module
-* Das ECMAScript (oder JavaScript) Modul System (ESM) kam erst 2015 in die Sprache
-* Common JS ist das Modulsystem von Node.JS
-* Node.JS unterstützt mittlerweile aber auch das JavaScript Modulsystem
-  * Auch TypeScript unterstützt beide Modulsysteme
-  * Ihr müsst Euch für das Ausgabe-Format entscheiden (CommonJS oder ESM)
-* Auch wenn das CommonJS Modulsystem nicht eingestellt wird, geht die Tendenz zu ESM
-  * Viele Bibliotheken bieten mittlerweile beide Formate (oder nur noch ESM) an
----
-### Unterschiede und Gemeinsamkeiten
-* In beiden Modulsystem ist ein **Modul** eine **Datei**
-  * In Java und anderen Programmiersprachen ist ein Modul tendenziell eine Sammlung von Dateien/Klassen
-* Externe Bibliotheken werden als **Packages** zur Verfügung gestellt (npm: node *package* manager)
-  * Die Bibliotheken können ihren Code für ein oder mehrere Modulsysteme zur Verfügung stellen
-* CommonJS Module werden synchron geladen, ES Module hingegen asynchron
-  * Das macht einen Mischbetrieb für die Laufzeitumgebung komplex
-* CommonJS Module funktionieren nicht im Browser
-* CommonJS flexibler, `require` kann überall verwendet werden, `import` nur am Beginn einer Datei
----
-### Packages in JavaScript
-- Bibliotheken und Tools werden als **Packages** in Registries zur Verfügung gestellt (z.B. NPM Package Registry, https://www.npmjs.com/)
-  - Beispiele für Tools: TypeScript, [ESLint](https://eslint.org/) oder Build-Tools
-  - Für Tools wird in der Regel Node.js als Ausführungsumgebung verwendet (alternativ Bun oder Deno)
-- Welche Packages ihr in eurem Projekt verwendet, wird in der `package.json`-Datei festgehalten
-- Dort gibt es u.a. `dependencies` und `devDependencies`
-  - `dependencies` beschreiben die Packages, die ihr zur Laufzeit verwendet (z.B. React)
-  - `devDependencies` sind Werkzeuge für den Entwicklungsprozess, z.B. TypeScript oder Test-Tools
----
-### Package Manager
-- Zur Installation und Aktualisierung von Packages verwendet ihr einen **Package Manager**
-- Es gibt drei Prominente:
-  - [npm](https://docs.npmjs.com/cli/v11/). Der Default Package Manager und Bestandteil von Node.JS
-  - [yarn](https://yarnpkg.com/) von Meta, aus dem Umfeld des React-Teams
-  - [pnpm](https://pnpm.io/), "Performant" npm. Mein Favorit 😊
-- Die Package Manager arbeiten alle mit der `package.json`-Datei
-- Unterschiede gibt es in der Verwendung (Kommandozeile) und der Installation der Packages
----
-### Abhängigkeiten von Packages
-- Die verwendeten Packages stehen in der `package.json`-Datei
-- Jedes installierte Package kann auch wieder Abhängigkeiten haben, die in dessen `package.json`-Datei stehen
-- Der Package Manager installiert alle Packages inklusive ihrer Abhängigkeiten
----
-### Versionsbereiche
-- In der `package.json` ist für jedes Package eine Version oder ein Versionsbereich angegeben.
-  - Das gilt auch für die abhängigen Packages
-- Damit Installationen reproduzierbar bleiben, legen die Package Manager eine weitere Datei in eurem Projekt ab, die **Lock-Datei**
-  - Diese Datei wird auch in Git eingecheckt
-  - Das Format dieser Datei ist abhängig vom jeweiligen Package Manager, deswegen sollte man sich im Projekt möglichst auf einen Package Manager einigen
----
-### Scripte
-- In der `package.json`-Datei können `scripts` definiert werden
-- Das sind meistens einfache Kommandozeilen-Scripte zum Ausführen z.B. vom Build oder Tests
-  - In Next.js z.B. `dev`, um den Development Server zu starten
-- Alle Package Manager sind in der Lage die Scripte auszuführen, auch wenn die Syntax abweicht
-  - Achtung! Die Scripte werden nativ auf dem Betriebssystem ausgeführt, ihr müsst also darauf achten, dass sie auf allen Betriebssystemen laufen, die ihr unterstützt.
----
-## Module
----
-### Module im Browser
-* Browser unterstützen nur das JavaScript Modulsystem
-  * Und das proprietäre AMD
-* Um auch Node.JS Module nutzen zu können, verwenden die meisten JS Frontend Tools sog. "Bundler"
-* Ein **Bundler** analysiert Eure JavaScript-Dateien und kann die verwendeten Modulsysteme "entfernen"
-* Dazu wird der Code durch Code ersetzt, der im Browser ausführbar ist
-  * Bekannte Bundler: [Webpack](https://webpack.js.org/) und [Rollup](https://rollupjs.org/)
-  * [TurboPack](https://turbo.build/pack) ist noch recht neu ist aber Standard für neue Next.js-Anwendungen
----
-### Das JavaScript Modulsystem
-* Das JavaScript Modulsystem (ESM) könnt ihr verwenden, wenn ihr:
-  * in Eurer `package.json`-Datei den `type`-Eintrag auf `module` setzt
-    * ```json
-      {
-        "type": "module"
-      }
-      ```
-  * oder in Dateien, die die Endung `.mjs` tragen
-* Mit TypeScript und Bundler ist das meistens etwas einfacher:
-  - Ihr verwendet die Dateiendung `.ts` bzw. `.tsx` (für React-Code)
-  - Beim Importieren braucht ihr die Dateiendung _nicht_ anzugeben.
-  </textarea
-  >
         </section>
 
         <!-- ============================================================================= -->
