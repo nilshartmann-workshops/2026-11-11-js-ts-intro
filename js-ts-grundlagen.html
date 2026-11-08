@@ -441,6 +441,40 @@ Arrays (Listen)
 
         <!-- ============================================================================= -->
         <section>
+          <h3>Bedingte Ausdrücke</h3>
+
+          <p>Mit dem <code>?:</code>-Operator wird aus einer Bedingung ein Wert:</p>
+
+          <pre class="fragment"><code class="javascript">
+        const age = 20;
+        const status = age >= 18 ? "volljährig" : "minderjährig";
+      </code></pre>
+
+          <p class="fragment"><code>&amp;&amp;</code> liefert den rechten Wert, wenn der linke truthy ist, sonst den linken:</p>
+
+          <pre class="fragment"><code class="javascript">
+        true &amp;&amp; "Hallo";  // "Hallo"
+        false &amp;&amp; "Hallo"; // false
+        0 &amp;&amp; "Hallo";     // 0 🤦
+      </code></pre>
+        </section>
+
+        <!-- ============================================================================= -->
+        <section>
+          <h3>Optional Chaining</h3>
+
+          <p><code>?.</code> greift nur dann auf ein Property zu, wenn der Wert davor nicht <code>null</code> oder <code>undefined</code> ist:</p>
+
+          <pre class="fragment"><code class="javascript">
+        const person = { name: "Susi" };
+
+        person.address.city;  // TypeError 😱
+        person.address?.city; // undefined
+      </code></pre>
+        </section>
+
+        <!-- ============================================================================= -->
+        <section>
           <h3>Template Strings</h3>
           <pre class="fragment"><code class="javascript">
 
@@ -610,7 +644,7 @@ printer(helloWorld);
 
           <p class="fragment">
             Die Beschreibung der Übung findest Du in
-            <b><code>js-intro/01_basic/index.js</code></b
+            <b><code>js-intro/01_basics/index.js</code></b
             >. Darin kannst Du auch deinen Code schreiben.
           </p>
           <p class="fragment">
@@ -618,7 +652,7 @@ printer(helloWorld);
           </p>
           <p class="fragment">
             Alternativ kannst du
-            <b><code>js-intro/01_basic/index.html</code></b> in deinem Browser öffnen. Diese Datei
+            <b><code>js-intro/01_basics/index.html</code></b> in deinem Browser öffnen. Diese Datei
             führt die <b><code>index.js</code></b
             >-Datei dann aus.
           </p>
@@ -629,7 +663,7 @@ printer(helloWorld);
           <p class="fragment">Bei Fragen oder Problemen, kannst Du dich jederzeit melden</p>
           <p class="fragment">
             Wenn alle Stricke reißen, findest Du eine mögliche Lösung in:
-            <code>js-intro/01_basic/solution/index.js</code>
+            <code>js-intro/01_basics/solution/index.js</code>
           </p>
           <p class="fragment">Wenn Du fertig bist, bitte "Hand heben" in Teams ✋</p>
         </section>
@@ -1347,10 +1381,10 @@ function loadUserProfileFromServer(userId) { /* liefert Promise zurück */ };
 
 // Wird mit dem ermittelten Wert aufgerufen und gibt neuen Wert (ebenfalls als Promise) zurück
 loadUserProfileFromServer("susi")
-  .then(profile => profile === null ? throw new Error("Profile not found") : profile.fullname)
+  .then(profile => { if (profile === null) throw new Error("Profile not found"); return profile.fullname; })
   .then(name => `Hello, ${name}`)
   .then(greeting => console.log(greeting))
-  .catch(err => console.err("Error while loading profile"));
+  .catch(err => console.error("Error while loading profile"));
 
 // wie sieht die Ausgabe "irgendwann" aus...
 // 🤔 ...wenn loadUserProfileFromServer dieses Objekt zurückliefert:
@@ -1369,7 +1403,7 @@ loadUserProfileFromServer("susi")
 
     .then(name => { if (name === null) throw new Error("No name found") })
 
-    .then(greeting => console.log(greeting));
+    .then(greeting => console.log(greeting))
 
     .catch(error => console.error(`Greeting failed: ${error}`))
 
@@ -1393,11 +1427,11 @@ loadUserProfileFromServer("susi")
           </p>
 
           <pre class="fragment"><code class="javascript" contenteditable>
-              const promise = getNameAsync();
+              const promise = getNameAsync()
 
                 .then(name => { if (name === null) throw new Error("No name found") })
 
-                .then(greeting => console.log(greeting));
+                .then(greeting => console.log(greeting))
 
                 .catch(error => console.error(`Greeting failed: ${error}`))
 
@@ -1429,7 +1463,7 @@ loadUserProfileFromServer("susi")
               const user = loadUserAsync(); // gibt Promise zurück
               const newsFeed = loadNewsFeedAsync(); // gibt Promise zurück
 
-              Promise.all(user, newsFeed)
+              Promise.all([user, newsFeed])
                 .then(result => {
                   const loadedUser = result[0];
                   const newsFeed = result[1];
@@ -1466,7 +1500,7 @@ loadUserProfileFromServer("susi")
     // await can only be used in 'async'-functions:
     async function onLoginClick(name, password) {
       try {
-        const user = await greet(name, password);
+        const user = await login(name, password);
         const profile = await loadProfile(user.id);
         return profile;
       } catch (err) {
@@ -1475,7 +1509,7 @@ loadUserProfileFromServer("susi")
       }
     }
                       </code></pre>
-          <p>Wichtig! Während die Anwendung auf <code>greet</code> bzw. <code>loadProfile</code> wartet, kann sie an anderer Stelle fortgesetzt werden</p>
+          <p>Wichtig! Während die Anwendung auf <code>login</code> bzw. <code>loadProfile</code> wartet, kann sie an anderer Stelle fortgesetzt werden</p>
         </section>
         <section>
           <h3>async / await</h3>
@@ -1569,11 +1603,11 @@ loadUserProfileFromServer("susi")
 
           <pre class="fragment"><code class="javascript">
             // src/domain/Person.js
-            export default function createPerson { ... }
+            export default function createPerson() { ... }
 
             oder
 
-            function createPerson { ... }
+            function createPerson() { ... }
             export default createPerson
           </code></pre>
 
@@ -1590,7 +1624,7 @@ loadUserProfileFromServer("susi")
           <pre class="fragment"><code class="javascript">
                 Nur EIN Default Export erlaubt;
                 export default function createPerson() { ... }
-                export default function makePerson { ... } // KONFLIKT
+                export default function makePerson() { ... } // KONFLIKT
               </code></pre>
         </section>
 
@@ -1600,8 +1634,8 @@ loadUserProfileFromServer("susi")
           <h4>Importieren</h4>
           <p class="fragment">Beim importieren geben wir Pfade(!) an</p>
           <p class="fragment">
-            Die Endung <code>.js</code> wird auch verwendet, wenn die importierte Datei eine
-            TypeScript-Datei ist!
+            Im React-Projekt schreiben wir die tatsächliche Endung der Datei, also
+            <code>.ts</code> bzw. <code>.tsx</code>
           </p>
           <p class="fragment">
             Wenn in der <code>package.json</code>-Datei als <code>type</code> <b>nicht</b>
@@ -1634,7 +1668,7 @@ loadUserProfileFromServer("susi")
 
           <pre class="fragment"><code class="javascript">
                 // src/domain/Person.js
-                export default function createPerson { ...}
+                export default function createPerson() { ...}
 
                 export function updatePerson() { ... }
                 export function removePerson() { ... }
@@ -1642,7 +1676,7 @@ loadUserProfileFromServer("susi")
 
           <pre class="fragment"><code class="javascript">
                   // src/domain/Person.js
-                  function createPerson { ...}
+                  function createPerson() { ...}
                   function updatePerson() { ... }
                   function removePerson() { ... }
 
@@ -1658,7 +1692,7 @@ loadUserProfileFromServer("susi")
           <h4>Benannte Importe</h4>
           <pre class="fragment"><code class="javascript">
                     // src/App.js
-                    import { removePerson } from "./Person"
+                    import { removePerson } from "./Person.js"
               </code></pre>
           <pre class="fragment"><code class="javascript">
                 // Default und benannten Export importieren
@@ -1687,7 +1721,7 @@ loadUserProfileFromServer("susi")
 
           <p class="fragment">
             Die Beschreibung der Übung findest Du in
-            <b><code>js-intro/05_modules/index.js</code></b
+            <b><code>js-intro/06_modules/index.js</code></b
             >. Darin kannst Du auch deinen Code schreiben.
           </p>
           <p class="fragment">Du kannst die Anwendung mit <code>node index.js</code> ausführen.</p>
@@ -1868,7 +1902,7 @@ let optionalCity:string|undefined|null = null; // OK
             </p>
             <pre class="fragment"><code class="typescript line-numbers" contenteditable data-trim>
 function greet(name: string, greeting?: string) {
-console.log(`${greeting || 'Hello'}, {name}`);
+console.log(`${greeting || 'Hello'}, ${name}`);
 }
 
 greet('Susi', 'Moin')// Moin, Susi
@@ -1953,8 +1987,8 @@ profession: 'Lokführer'
 * Intersection Types sind vorsichtig mit Vererbung in OO vergleichbar
 * Ein Intersection Type enthält _alle_ Eigenschaften die in einem (oder mehreren Typen) vorhanden sind
 * ```typescript
-  const Person = { firstname: string }
-  const Employee = Person & { company : string }
+  type Person = { firstname: string }
+  type Employee = Person & { company : string }
 
   const e: Employee = { firstname: "Klaus", company: "IT AG" }
   ```
@@ -2160,7 +2194,7 @@ function printNameOrTitle(obj: Person | Movie) {
     }
 
     // a ist hier String
-    return `Hello, ${a.toUppercase()}`
+    return `Hello, ${a.toUpperCase()}`
   }
   ```
 
@@ -2229,7 +2263,7 @@ function assertIsMovie(candidate: any): asserts candidate is Movie {
 }
 
 function printTitle(hopefullyAMovie: any) {
-  assertPersonIsMovie(hopefullyAMovie)
+  assertIsMovie(hopefullyAMovie)
   // hopefullyAMovie ist jetzt Movie
   hopefullyAMovie.title; // OK
 }
@@ -2246,7 +2280,7 @@ function printTitle(hopefullyAMovie: any) {
   type Answer = "Yes" | "No" | "I_dont_care";
 
   const a1:Answer = "Yes"; // OK
-  const a2:View = "Maybe" // FEHLER
+  const a2:Answer = "Maybe" // FEHLER
   ```
 * ```typescript
   function fillIn(a: Answer) {
@@ -2268,7 +2302,7 @@ function printTitle(hopefullyAMovie: any) {
 ---
 ### Der typeof-Operator
 
-* Der `typeof`-Operator in JavaScript liefert den _Wert_ einer Variablen zur Laufzeit zurück.
+* Der `typeof`-Operator in JavaScript liefert den _Typ_ einer Variablen als String zur Laufzeit zurück.
 * Mit dem [`typeof`-Operator von TypeScript](https://www.typescriptlang.org/docs/handbook/2/typeof-types.html#handbook-content) kann der Typ eines Werts auf Typ-Ebene ermittelt werden.
   * Im Grunde das, was die IDE tut, wenn ihr mit der Maus über einen Variable fahrt
 * ```typescript

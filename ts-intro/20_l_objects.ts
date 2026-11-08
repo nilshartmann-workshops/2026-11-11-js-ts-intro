@@ -49,31 +49,6 @@ const p2: Person = {
 	greet(p) { return `Hello, ${p}`}
 }
 
-// Falsche Werte
-//   Achtung! 'ts-expect-error' sagt TypeScript,
-//     dass hier ein Fehler _erwartet_ wird
-//     Wir sagen also TS, wir machen hier etwas bewusst falsch
-//  Wenn du den Person Typen korrekt beschrieben hast,
-//    dürfen hier keine Fehler auftreten
-//    Beispiel:
-//     "salutation: 3" hat einen falschen Typ (kein String)
-//     da wir TS mit ts-expect-error sagen, dass wir diesen
-//     Fehler _erwarten_ wird TS hier keinen Fehler anzeigen
-//     außer, wenn es keinen Fehler gibt 🤯
-//     (also wenn du fälschlicherweise im Person-Typ für
-//     salutation auch eine Zahl erlauben würdest)
-//   Kurzfassung: auch hier dürfen keine Fehler von TS angezeigt
-//    wenn, selbst wenn die Werte nicht zu deinem Typen passen.
-const p3: Person = {
-	firstname: "Susi",
-	// @ts-expect-error
-	salutation: 3,
-	// @ts-expect-error
-	age: null,
-	// @ts-expect-error
-	greet(p: number) { return `Hello, ${p}`}
-}
-
 // ZUSATZ-AUFGABE
 //   - Definiere einen zweiten Typen "Animal",
 //      der nur eine Eigenschaft hat:
